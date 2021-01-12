@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Traits;
 
-use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
-class UploadImageController extends Controller
+trait UploadImage
 {
     /**
      * 随机的文件名
@@ -20,7 +19,7 @@ class UploadImageController extends Controller
      * @return str 文件上传的路径
      */
     private static function createDir() {
-        $dir = env('UPLOADPATH') . date('Ymd', time());
+        $dir = env('UPLOADPATH') .'/'. date('Ymd', time());
         if (is_dir($dir) || mkdir($dir, 0777, true)) {
         return $dir;
         }

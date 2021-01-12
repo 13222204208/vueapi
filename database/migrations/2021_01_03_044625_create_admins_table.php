@@ -17,7 +17,10 @@ class CreateAdminsTable extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('nickname')->nullable();
+            $table->string('name')->nullable();
+            $table->string('roles')->nullable();
+            $table->string('introduction')->nullable();
+            $table->string('avatar')->default('https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')->comment('头像');
             $table->string('phone')->nullable();
             $table->tinyInteger('status')->default(1)->comment('状态 ，1 正常，2 禁用');
             $table->timestamps();

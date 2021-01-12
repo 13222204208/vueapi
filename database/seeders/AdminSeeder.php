@@ -16,6 +16,8 @@ class AdminSeeder extends Seeder
         $admin = new \App\Models\Admin;
         $admin->username = 'myadmin';
         $admin->password = \Illuminate\Support\Facades\Hash::make('123456');
+        $admin->avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif';
+        $admin->name = 'admin';
         $admin->save();
     }
 }
