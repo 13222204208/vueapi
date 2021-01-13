@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use App\Traits\Timestamp;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
 class Admin extends Authenticatable implements JWTSubject
 {
-    use HasFactory,Timestamp;
+    use HasFactory,Timestamp,HasRoles;
     protected $guarded = [];
 
     /**

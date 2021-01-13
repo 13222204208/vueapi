@@ -2,36 +2,22 @@
 
 namespace App\Http\Controllers\Admin\Back;
 
-use App\Models\Admin;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 
-class AccountController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {  
-        $all= $request->all();
-        $limit = $all['limit'];
-        $page = ($all['page'] -1)*$limit;
-        $username = false;
-        if($request->has('username')){
-            $username = $all['username'];
-        }
-    
-        $item = Admin::when($username,function($query) use ($username){
-            return $query->where('username','like','%'.$username.'%');
-        })->skip($page)->take($limit)->get();
-        $total = Admin::count();
-        $data['item'] = $item;
-        $data['total'] = $total;
-        $data['all'] = $all;
-        return $this->success($data);
+    public function index()
+    {
+        $data['guard_name'] = 'admin';
+        $datas= Permission::tree($data);
+        return $this->success($datas);
     }
 
     /**
@@ -52,13 +38,7 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only(['username','password','name']);
-        $data['password'] = Hash::make($data['password']);
-         
-        $state= Admin::create($data);
-        if($state){
-            return $this->success();
-        }
+        //
     }
 
     /**
@@ -92,13 +72,7 @@ class AccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $state = Admin::where('id',$id)->update([
-            'name' => $request->name
-            ]    
-        );
-        if($state){
-            return $this->success();
-        }
+        //
     }
 
     /**
@@ -109,9 +83,6 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        $state = Admin::destroy($id);
-        if($state){
-            return $this->success();
-        }
+        //
     }
 }

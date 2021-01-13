@@ -21,6 +21,7 @@ Route::prefix('admin')->group(function (){
         Route::group(['middleware' => 'auth:admin'], function () {   
     
             Route::resource('account', 'AccountController');//后台帐号
+            Route::resource('permission', 'PermissionController');//后台权限
             
         });
     });
